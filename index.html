@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sagarmatha</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <!-- <body style="background-image: url('./assets/images/COVID-19-background-image-2301x1306.jpeg');"> -->
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a
+          style="font-weight: bolder; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"
+          href="#!"
+          class="brand-logo center"
+          >Sagarmatha COVID-19 Global Numbers</a
+        >
+        <ul class="left hide-on-med-and-down">
+          <!-- <li><a href="#">Home</a></li>
+          <li><a href="#">Contact</a></li>
+          <li class="active"><a href="#">About</a></li> -->
+          <li><button class="btn-flat home-btn disabled" type="submit">Home</button></li>
+          <li><button class="btn-flat contact-btn" type="submit">Contact</button></li>
+          <li><button class="btn-flat about-us-btn" type="submit">About Us</button></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row left-align" id="dropdown-row">
+        <div class="col" id="country-dropdown-div">
+          <label>Country Select</label>
+          <select class="browser-default" id="country-dropdown-select">
+            <option value="" disabled selected>Choose country</option>
+            <!-- <option value="usa" data-province="true">USA</option>
+            <option value="China" data-province="true">China</option>
+            <option value="Great Britain" data-province="true">Great Britain</option>
+            <option value="France" data-province="true">France</option>
+            <option value="Italy" data-province="false">Italy</option>
+            <option value="Netherland" data-province="true">Netherland</option> -->
+          </select>
+        </div>
+        <div class="col" id="state-dropdown-div">
+          <!-- <label>Province/State Select</label>
+          <select class="browser-default" id="usa">
+            <option value="" disabled selected>Choose Prov./State</option>
+            <option value="Alabama" data-province="true">Alabama</option>
+            <option value="Alaska" data-province="true">Alaska</option>
+            <option value="American Samoa" data-province="true">American Samoa</option>
+            <option value="Arizona" data-province="Arizona">France</option>
+            <option value="Arkansas" data-province="false">Arkansas</option>
+            <option value="California" data-province="true">California</option>
+          </select> -->
+        </div>
+        <div class="col" id="county-dropdown-div">
+          <!-- <label>County Select</label>
+          <select class="browser-default" id="California">
+            <option value="" disabled selected>Choose county</option>
+            <option value="Alameda" data-province="true">Alameda</option>
+            <option value="Kern" data-province="true">Kern</option>
+            <option value="Los Angeles" data-province="true">Los Angeles</option>
+            <option value="Orange" data-province="true">Orange</option>
+            <option value="San Diego" data-province="false">San Diego</option>
+            <option value="Santa Clara" data-province="true">Santa Clara</option>
+          </select> -->
+        </div>
+      </div>
+      <!-- This row will contain the main part of the page. Two major columns
+      1. Column containing random messages about corona virus
+      -->
+      <div class="row">
+        <div class="col s4" style="border: 1px solid black;" id="sidebar">
+          <div class="row">
+            <h5 style="color: red; font-weight: bold;">World Stats:</h5>
+            <p>Total Cases:&nbsp;<span id="world-stat-total-cases" style="font-weight: bold;"></span></p>
+            <p>Total Deaths:&nbsp;<span id="world-stat-total-deaths" style="font-weight: bold;"></span></p>
+            <p>Recovered:&nbsp;<span id="world-stat-total-recovered" style="font-weight: bold;"></span></p>
+            <p>New Cases:&nbsp;<span id="world-stat-new-cases" style="font-weight: bold;"></span></p>
+            <p>New Deaths:&nbsp;<span id="world-stat-new-deaths" style="font-weight: bold;"></span></p>
+          </div>
+          <div class="row">
+            <hr />
+          </div>
+          <div class="row">
+            <img id="random-img" src="./assets/images/random/random-1.PNG" alt="" width="100%" />
+          </div>
+        </div>
+        <div class="col s8" id="mainbar">
+          <div class="row" id="map">
+            <img src="./assets/images/maps/countries/world/world.gif" width="100%" alt="" />
+          </div>
+          <div class="row" id="table-data">
+            <table class="striped bordered">
+              <thead>
+                <tr>
+                  <th colspan="1"></th>
+                  <th style="text-align: center;" colspan="5">Cases</th>
+                  <th style="text-align: center;" colspan="2">Deaths</th>
+                </tr>
+                <tr>
+                  <th>Region</th>
+                  <th style="text-align: right;">New</th>
+                  <th style="text-align: right;">Active</th>
+                  <th style="text-align: right;">Critical</th>
+                  <th style="text-align: right;">Recovered</th>
+                  <th style="text-align: right;">Total</th>
+                  <th style="text-align: right;">New</th>
+                  <th style="text-align: right;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr>
+                  <th>North America</th>
+                  <td style="text-align: right;">15412</td>
+                  <td style="text-align: right;">545351</td>
+                  <td style="text-align: right;">13637</td>
+                  <td style="text-align: right;">43955</td>
+                  <td style="text-align: right;">613707</td>
+                  <td style="text-align: right;">925</td>
+                  <td style="text-align: right;">24401</td>
+                </tr>
+                <tr>
+                  <th>South America</th>
+                  <td style="text-align: right;">980</td>
+                  <td style="text-align: right;">43313</td>
+                  <td style="text-align: right;">1142</td>
+                  <td style="text-align: right;">6085</td>
+                  <td style="text-align: right;">51561</td>
+                  <td style="text-align: right;">82</td>
+                  <td style="text-align: right;">2163</td>
+                </tr>
+                <tr>
+                  <th>Europe</th>
+                  <td style="text-align: right;">19432</td>
+                  <td style="text-align: right;">591146</td>
+                  <td style="text-align: right;">29817</td>
+                  <td style="text-align: right;">230405</td>
+                  <td style="text-align: right;">900542</td>
+                  <td style="text-align: right;">2223</td>
+                  <td style="text-align: right;">78991</td>
+                </tr>
+                <tr>
+                  <th>Asia</th>
+                  <td  style="text-align: right;">10297</td>
+                  <td  style="text-align: right;">147276</td>
+                  <td  style="text-align: right;">6651</td>
+                  <td  style="text-align: right;">150429</td>
+                  <td  style="text-align: right;">309033</td>
+                  <td  style="text-align: right;">326</td>
+                  <td  style="text-align: right;">11328</td>
+                </tr> -->
+                <!-- <tr> -->
+                <!-- <th>Africa</th> -->
+                <!--new cases-->
+                <!-- <td  style="text-align: right;">442</td> -->
+                <!--active cases-->
+                <!-- <td  style="text-align: right;">11692</td> -->
+                <!--critical cases-->
+                <!-- <td  style="text-align: right;">178</td> -->
+                <!--recovered cases-->
+                <!-- <td  style="text-align: right;">3006</td> -->
+                <!--total cases-->
+                <!-- <td  style="text-align: right;">15524</td> -->
+                <!--new deaths-->
+                <!-- <td  style="text-align: right;">35</td> -->
+                <!--total deaths-->
+                <!-- <td  style="text-align: right;">826</td> -->
+                <!-- </tr> -->
+                <!-- <tr> -->
+                <!-- <th>Oceania</th> -->
+                <!-- <td  style="text-align: right;">65</td> -->
+                <!--new cases-->
+                <!-- <td  style="text-align: right;">3690</td> -->
+                <!--active cases-->
+                <!-- <td  style="text-align: right;">84</td> -->
+                <!--critical cases-->
+                <!-- <td  style="text-align: right;">4041</td> -->
+                <!--recovered cases-->
+                <!-- <td  style="text-align: right;">7797</td> -->
+                <!--total cases-->
+                <!-- <td  style="text-align: right;">3</td> -->
+                <!--new deaths-->
+                <!-- <td  style="text-align: right;">66</td> -->
+                <!--total deaths-->
+                <!-- </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+    The following is for the Marquee to be placed at the footer
+    <div id="marquee" class="marquee">Sapana is from Nepal, the birthplace of Gautama Buddha</div>
+    -->
+    <!-- Compiled and minified JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/javascript/globals.js"></script>
+    <script src="./assets/javascript/script.js"></script>
+  </body>
+</html>
