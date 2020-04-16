@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <!-- <body style="background-image: url('./assets/images/COVID-19-background-image-2301x1306.jpeg');"> -->
-  <body>
+  <body style="background-color: lightgoldenrodyellow;">
     <nav>
       <div class="nav-wrapper">
         <a
@@ -32,8 +32,8 @@
     <div class="container">
       <div class="row left-align" id="dropdown-row">
         <div class="col" id="country-dropdown-div">
-          <label>Country Select</label>
-          <select class="browser-default" id="country-dropdown-select">
+          <label style="font-weight: bold;">Country Select</label>
+          <select style="background-color: goldenrod;" class="browser-default" id="country-dropdown-select">
             <option value="" disabled selected>Choose country</option>
             <!-- <option value="usa" data-province="true">USA</option>
             <option value="China" data-province="true">China</option>
@@ -45,7 +45,7 @@
         </div>
         <div class="col" id="state-dropdown-div">
           <!-- <label>Province/State Select</label>
-          <select class="browser-default" id="usa">
+          <select class="browser-default" id="state-dropdown-select">
             <option value="" disabled selected>Choose Prov./State</option>
             <option value="Alabama" data-province="true">Alabama</option>
             <option value="Alaska" data-province="true">Alaska</option>
@@ -57,7 +57,7 @@
         </div>
         <div class="col" id="county-dropdown-div">
           <!-- <label>County Select</label>
-          <select class="browser-default" id="California">
+          <select class="browser-default" id="county-dropdown-select">
             <option value="" disabled selected>Choose county</option>
             <option value="Alameda" data-province="true">Alameda</option>
             <option value="Kern" data-province="true">Kern</option>
@@ -73,24 +73,60 @@
       -->
       <div class="row">
         <div class="col s4" style="border: 1px solid black;" id="sidebar">
-          <div class="row">
-            <h5 style="color: red; font-weight: bold;">World Stats:</h5>
-            <p>Total Cases:&nbsp;<span id="world-stat-total-cases" style="font-weight: bold;"></span></p>
-            <p>Total Deaths:&nbsp;<span id="world-stat-total-deaths" style="font-weight: bold;"></span></p>
-            <p>Recovered:&nbsp;<span id="world-stat-total-recovered" style="font-weight: bold;"></span></p>
-            <p>New Cases:&nbsp;<span id="world-stat-new-cases" style="font-weight: bold;"></span></p>
-            <p>New Deaths:&nbsp;<span id="world-stat-new-deaths" style="font-weight: bold;"></span></p>
+          <div class="row" id="world-stats">
+            <h5 style="color: red; font-weight: bold; background-color: aquamarine;">World Stats:</h5>
+            <p class="side-nav-p">
+              Total Cases:&nbsp;<span id="world-stat-total-cases" style="font-weight: bold;"></span>
+            </p>
+            <p class="side-nav-p">
+              Total Deaths:&nbsp;<span id="world-stat-total-deaths" style="font-weight: bold;"></span>
+            </p>
+            <p class="side-nav-p">
+              Recovered:&nbsp;<span id="world-stat-total-recovered" style="font-weight: bold;"></span>
+            </p>
+            <p class="side-nav-p">New Cases:&nbsp;<span id="world-stat-new-cases" style="font-weight: bold;"></span></p>
+            <p class="side-nav-p">
+              New Deaths:&nbsp;<span id="world-stat-new-deaths" style="font-weight: bold;"></span>
+            </p>
           </div>
-          <div class="row">
+          <div class="row" id="country-stats">
+            <!-- <h6 id="country-name" style="color: brown; font-weight: bold;">Country Name Stats:</h6>
+            <p class="side-nav-p">New Cases:&nbsp;<span id="country-stat-new-cases" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">Active Cases:&nbsp;<span id="country-stat-active-cases" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">Critical Cases:&nbsp;<span id="country-stat-critical-cases" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">Recovered Cases:&nbsp;<span id="country-stat-recovered-cases" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">Total Cases:&nbsp;<span id="country-stat-total-cases" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">New Deaths:&nbsp;<span id="country-stat-new-deaths" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">Total Deaths:&nbsp;<span id="country-stat-total-deaths" style="font-weight: bold;">0</span></p> -->
+          </div>
+          <div class="row" id="province-stats">
+            <!-- <h6 id="province-name" style="color: brown; font-weight: bold;">State Name Stats:</h6>
+            <p class="side-nav-p">Total Cases:&nbsp;<span id="province-stat-confirmed" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">Total Deaths:&nbsp;<span id="province-stat-deaths" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">Recovered:&nbsp;<span id="province-stat-recovered" style="font-weight: bold;">0</span></p> -->
+          </div>
+          <div class="row" id="county-stats">
+            <!-- <h6 id="county-name" style="color: brown; font-weight: bold;">County Name Stats:</h6>
+            <p class="side-nav-p">Total Cases:&nbsp;<span id="county-stat-confirmed" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">Total Deaths:&nbsp;<span id="county-stat-deaths" style="font-weight: bold;">0</span></p>
+            <p class="side-nav-p">Recovered:&nbsp;<span id="county-stat-recovered" style="font-weight: bold;">0</span></p> -->
+          </div>
+          <!-- <div class="row">
             <hr />
-          </div>
-          <div class="row">
+          </div> -->
+          <div class="row" style="margin-bottom: 0px;">
             <img id="random-img" src="./assets/images/random/random-1.PNG" alt="" width="100%" />
           </div>
         </div>
-        <div class="col s8" id="mainbar">
-          <div class="row" id="map">
-            <img src="./assets/images/maps/countries/world/world.gif" width="100%" alt="" />
+        <div class="col s8 center-align" id="mainbar">
+          <div class="row" id="map" style="margin: 0px; height: 350px;">
+            <img
+              class="center-align"
+              id="img-map"
+              src="./assets/images/maps/countries/world/world.gif"
+              height="100%"
+              alt=""
+            />
           </div>
           <div class="row" id="table-data">
             <table class="striped bordered">
@@ -144,13 +180,13 @@
                 </tr>
                 <tr>
                   <th>Asia</th>
-                  <td  style="text-align: right;">10297</td>
-                  <td  style="text-align: right;">147276</td>
-                  <td  style="text-align: right;">6651</td>
-                  <td  style="text-align: right;">150429</td>
-                  <td  style="text-align: right;">309033</td>
-                  <td  style="text-align: right;">326</td>
-                  <td  style="text-align: right;">11328</td>
+                  <td style="text-align: right;">10297</td>
+                  <td style="text-align: right;">147276</td>
+                  <td style="text-align: right;">6651</td>
+                  <td style="text-align: right;">150429</td>
+                  <td style="text-align: right;">309033</td>
+                  <td style="text-align: right;">326</td>
+                  <td style="text-align: right;">11328</td>
                 </tr> -->
                 <!-- <tr> -->
                 <!-- <th>Africa</th> -->
@@ -205,6 +241,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/javascript/globals.js"></script>
+    <script src="./assets/javascript/actionListener.js"></script>
     <script src="./assets/javascript/script.js"></script>
   </body>
 </html>

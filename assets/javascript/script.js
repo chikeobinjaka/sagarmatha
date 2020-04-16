@@ -5,7 +5,7 @@
 // Dropdown trigger
 $(".dropdown-trigger").dropdown();
 $(document).ready(function () {
-  // get and publish world-stats
+    // get and publish world-stats
   renderWorldStats();
   // start interval timer that will change the random images
   randomImages();
@@ -26,6 +26,9 @@ function randomImages() {
 
   loadCovid193Statistics();
   loadCovid19CoronavirusStatistics();
+  $("#country-dropdown-select").change(function () {
+    countrySelectActionListener(event, this.value);
+  });
 }
 
 /**
@@ -101,9 +104,9 @@ function loadCovid193Statistics() {
       }
       covid193CountryData = resp;
       covid193Countries = Object.keys(covid193CountryData);
-      console.log("Unsorted Countries ==>" + covid193Countries);
+      if (logIt) console.log("Unsorted Countries ==>" + covid193Countries);
       covid193Countries.sort();
-      console.log("\nSorted Countries ==>" + covid193Countries);
+      if (logIt) console.log("\nSorted Countries ==>" + covid193Countries);
       populateRegionTable();
       populateCountryDropDown();
     }
@@ -117,42 +120,93 @@ function loadCovid193Statistics() {
 function populateCountryDropDown() {
   // get country dropdown and empty it
   var $countryDropdownSelect = $("#country-dropdown-select");
-  console.log($countryDropdownSelect);
+  if (logIt) console.log($countryDropdownSelect);
   $countryDropdownSelect.empty();
-  console.log("Country Dropdown should be empty");
+  if (logIt) console.log("Country Dropdown should be empty");
   // get state/province dropdown and delete it
   var $stateDropdownDiv = $("#state-dropdown-div");
   if ($stateDropdownDiv != null) {
-    console.log("Found State Dropdown DIV");
+    if (logIt) console.log("Found State Dropdown DIV");
     $stateDropdownDiv.remove();
-    console.log("State Dropdown should be gone");
+    if (logIt) console.log("State Dropdown should be gone");
   }
   // get county dropdown and delete it
   var $countyDropdownDiv = $("#county-dropdown-div");
   if ($countyDropdownDiv != null) {
-    console.log("Found County Dropdown DIV");
+    if (logIt) console.log("Found County Dropdown DIV");
     $countyDropdownDiv.remove();
-    console.log("County Dropdown should be gone");
+    if (logIt) console.log("County Dropdown should be gone");
   }
   // first add disabled option
   var elementText = '<option value="Choose country" disabled selected>Choose country</option>';
-  console.log("Country Option Element ==> " + elementText);
+  if (logIt) console.log("Country Option Element ==> " + elementText);
   var $option = $(elementText);
   $countryDropdownSelect.append($option);
   // fill in country dropdown
   // <option value="USA" data-province="true">USA</option>
   var countriesWithProvince = Object.keys(COUNTRIES_WITH_PROVINCE_DATA);
+
   for (let index = 0; index < covid193Countries.length; index++) {
     var country = covid193Countries[index];
+    if (SKIP_REGIONS.indexOf(country) != -1) continue;
     var dataProvince = "false";
     if (countriesWithProvince.indexOf(country) != -1) dataProvince = "true";
     elementText = `<option value="${country}" data-province="${dataProvince}">${country}</option>`;
-    console.log("Country Option Element ==> " + elementText);
+    if (logIt) console.log("Country Option Element ==> " + elementText);
     $option = $(elementText);
     $countryDropdownSelect.append($option);
   }
 }
 
+function populateCountyDropDown(state) {
+  // get county dropdown and delete it
+  var $countyDropdownDiv = $("#county-dropdown-div");
+  if ($countyDropdownDiv != null) {
+    if (logIt) console.log("Found County Dropdown DIV");
+    $countyDropdownDiv.remove();
+    if (logIt) console.log("County Dropdown should be gone");
+  }
+
+  if (state == null || state == "" || covid19Stats == null || covid19Stats.length == 0) {
+    return;
+  }
+  var counties = [];
+  var stat;
+  var county;
+  for (let index = 0; index < covid19Stats.length; index++) {
+    stat = covid19Stats[index];
+    if (stat.country == "US" && stat.province == state) {
+      county = stat.city;
+      if (counties.indexOf(county) == -1) {
+        counties.push(county);
+      }
+    }
+  }
+  if (counties.length != 0) {
+    // handle condition where state name and county name are the same
+    // like District of Columbia.
+    //if (counties.length == 1 && counties[index] == state) return;
+    counties.sort();
+    console.log("Counties in " + state + " are\n" + counties);
+    var html = `<div class="col" id="county-dropdown-div">
+    <label style="font-weight:bold;">Select County</label>
+    <select style="background-color: goldenrod;" class="browser-default" id="county-dropdown-select">
+    <option value="" disabled selected>Choose county</option>`;
+    var county;
+    for (let index = 0; index < counties.length; index++) {
+      county = counties[index];
+      html += `<option value="${county}">${county}</option>`;
+    }
+    html += `</select></div>`;
+    $countyDropdownDiv = $(html);
+    $("#dropdown-row").append($countyDropdownDiv);
+    // set action listener on the DIV
+    $("#county-dropdown-select").change(function () {
+      console.log("County select: " + this.value);
+      countySelectActionListener(event, this.value);
+    });
+  }
+}
 /**
  * This function is used to get data for a specific country or if the
  * country does not exist, for all countries. This information is primaruly used to
@@ -161,7 +215,7 @@ function populateCountryDropDown() {
  * @param {*} country
  */
 function loadCovid19CoronavirusStatistics(country) {
-  covid_19_coronovirus_statistics_response = null;
+  covid19Stats = null;
 
   if (country != null) {
     country = `?country=${country}`;
@@ -178,17 +232,15 @@ function loadCovid19CoronavirusStatistics(country) {
   };
 
   $.ajax(settings).done(function (response) {
-    var covid19Stats = null;
     if (response != null && response.data != null && (covid19Stats = response.data.covid19Stats) != null) {
-      console.log(response.error);
-      console.log(response.statusCode);
-      console.log(response.message);
+      covid19Stats = response.data.covid19Stats;
+      if (logIt) {
+        console.log(response.error);
+        console.log(response.statusCode);
+        console.log(response.message);
+        console.log(covid19Stats);
+      }
     }
-
-    // if (response.errors != undefined && response.errors != null && response.errors == []) {
-    //   covid_19_coronovirus_statistics_response = JSON.parse(response);
-    // }
-    // if (logIt) console.log(response);
   });
 }
 
@@ -219,13 +271,17 @@ function populateRegionTable() {
         var country = data.country.replace(/\-/g, " ");
         var cases = data.cases;
         // get rid of "+"
-        var newCases = cases.new.replace(/\+/g, "");
+        var newCases = cases.new;
+        if (newCases != null) newCases = newCases.replace(/\+/g, "");
+        else newCases = "0";
         var activeCases = cases.active;
         var criticalCases = cases.critical;
         var recoveredCases = cases.recovered;
         var totalCases = cases.total;
         var deaths = data.deaths;
-        var newDeaths = deaths.new.replace(/\+/g, "");
+        var newDeaths = deaths.new;
+        if (newDeaths != null) newDeaths = newDeaths.replace(/\+/g, "");
+        else newDeaths = "0";
         var totalDeaths = deaths.total;
         if (logIt) {
           console.log("\n\nCountry: " + country);
@@ -237,6 +293,13 @@ function populateRegionTable() {
           console.log("\tNew Deaths:      " + newDeaths);
           console.log("\tTotal Deaths:    " + totalDeaths);
         }
+        newCases = formatNumber(newCases);
+        activeCases= formatNumber(activeCases);
+        criticalCases= formatNumber(criticalCases);
+        recoveredCases= formatNumber(recoveredCases);
+        totalCases= formatNumber(totalCases);
+        newDeaths= formatNumber(newDeaths);
+        totalDeaths= formatNumber(totalDeaths);
         $tableRow = $(`<tr>
         <th>${country}</th>
         <!--new cases-->
@@ -258,4 +321,125 @@ function populateRegionTable() {
       }
     }
   }
+}
+
+/**
+ * Searches the covid19-coronavirus data for province information
+ * regaring country
+ * @param {*} country The country for which provincial data is sought
+ */
+function populateProvinceDropdown(country) {
+  // check if there is a county dropdown. If so, remove it
+  // get county dropdown and delete it
+  var $countyDropdownDiv = $("#county-dropdown-div");
+  if ($countyDropdownDiv != null) {
+    if (logIt) console.log("Found County Dropdown DIV");
+    $countyDropdownDiv.remove();
+    if (logIt) console.log("County Dropdown should be gone");
+  }
+  // go through covid19Stats and get province names
+  var provinces = [];
+  var province;
+  if (country == "USA") country = "US";
+  if (country == "UK") country = "United Kingdom";
+  for (let index = 0; index < covid19Stats.length; index++) {
+    var data = covid19Stats[index];
+    if (data.country == country && (province = data.province) != "") {
+      // don't know what this "province" is??!!??
+      if (province == "Recovered") continue;
+      if (provinces.indexOf(province) == -1) {
+        provinces.push(province);
+      }
+    }
+  }
+  if (provinces.length != 0) {
+    provinces.sort();
+    console.log("Provinces for " + country + " are " + provinces);
+    // now populate dropdown
+    var html = '<div class="col" id="state-dropdown-div">';
+    html += '<label style="font-weight: bold;">Province/State Select</label>';
+    html += `<select style="background-color: goldenrod;" class="browser-default" id="state-dropdown-select">`;
+    html += '<option value="" disabled selected>Choose Prov./State</option>';
+    for (let index = 0; index < provinces.length; index++) {
+      province = provinces[index];
+      html += `<option value="${province}" data-province="true">${province}</option>`;
+    }
+    html += `</select></div>`;
+    $provinceDropdown = $(html);
+    $("#dropdown-row").append($provinceDropdown);
+    // add event listener to the province dropdown
+    $("#state-dropdown-select").change(function () {
+      console.log("State/Province select: " + this.value);
+      provinceSelectActionListener(event, this.value);
+    });
+  }
+}
+
+/**
+ * Using the data in covid-19-coronavirus-statistics.
+ * it will return data in the follwoing format:
+ * { confirmed:"0",
+ *   deaths:"0",
+ *   recovered:"0",
+ * }
+ * @param {*} country
+ * @param {*} province
+ */
+function getProvinceStat(country, province) {
+  var retval = { confirmed: 0, deaths: 0, recovered: 0 };
+  var statCountry, statProvince, resp;
+  var response = covid19Stats;
+  var confirmed = 0;
+  var deaths = 0;
+  var recovered = 0;
+  if (country == "UK") country = "United Kingdom";
+  if (country == "USA") country = "US";
+  if (country != null && province != null && response != null) {
+    for (let index = 0; index < response.length; index++) {
+      resp = response[index];
+      statCountry = resp.country.replace(/\-/g, " ").trim();
+      statProvince = resp.province.replace(/\-/g, " ").trim();
+      // if (statCountry == country)console.log(`${country}/${province} ==> ${statCountry}/${statProvince}`);
+      if (statCountry == country && statProvince == province) {
+        console.log(`Found data for Country/Province ==> ${country}/${province}`);
+        if (Number.isInteger(resp.confirmed)) confirmed += resp.confirmed;
+        if (Number.isInteger(resp.deaths)) deaths += resp.deaths;
+        if (Number.isInteger(resp.recovered)) recovered += resp.recovered;
+      }
+    }
+    retval["confirmed"] = confirmed;
+    retval["deaths"] = deaths;
+    retval["recovered"] = recovered;
+  }
+  return retval;
+}
+
+function getCountyStat(country, province, county) {
+  var retval = { confirmed: 0, deaths: 0, recovered: 0 };
+  var statCountry, statProvince, statCounty, resp;
+  var response = covid19Stats;
+  var confirmed = 0;
+  var deaths = 0;
+  var recovered = 0;
+  if (country == "USA") country = "US";
+  if (country != null && province != null && response != null) {
+    for (let index = 0; index < response.length; index++) {
+      resp = response[index];
+      statCountry = resp.country.replace(/\-/g, " ").trim();
+      statProvince = resp.province.replace(/\-/g, " ").trim();
+      statCounty = resp.city.replace(/\-/g, " ").trim();
+      // if (statCountry == country)console.log(`${country}/${province} ==> ${statCountry}/${statProvince}`);
+      if (statCounty == county && statCountry == country && statProvince == province) {
+        console.log(`Found data for Country/Province/County ==> ${country}/${province}/${county}`);
+        if (Number.isInteger(resp.confirmed)) confirmed += resp.confirmed;
+        if (Number.isInteger(resp.deaths)) deaths += resp.deaths;
+        if (Number.isInteger(resp.recovered)) recovered += resp.recovered;
+        break;
+      }
+    }
+    retval["confirmed"] = confirmed;
+    retval["deaths"] = deaths;
+    retval["recovered"] = recovered;
+  }
+  return retval;
 }
