@@ -22,7 +22,19 @@ img {
   max-height: 500;
 }
 
-.side-nav-p{
-  margin-top:0px;
+.side-nav-p {
+  margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.footer-marquee {
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-family: sans-serif;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  position: relative;
+  background-color: #ee6e73;
+  padding-top: 15px;
+  color: white;
 }

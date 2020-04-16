@@ -1,0 +1,76 @@
+#marquee-id > .heading {
+  background-color: #ffffff7d;
+  font-size: 1.5rem;
+  line-height: 0.8;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+#displayDate {
+  text-align: center;
+  font-weight: bold;
+}
+
+#marquee-id > .heading p {
+  text-align: center;
+  font-weight: bold;
+}
+
+#marquee-id > .disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+#marquee-id > .container {
+  background-color: aliceblue;
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+
+#marquee-id > .container select {
+  display: block;
+}
+
+#marquee-id > div label {
+  font: 1.2em sans-serif;
+  color: black;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+#dropdown-row {
+  margin-left: 40px;
+}
+
+#marquee-id > table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+#marquee-id > th,
+td {
+  padding: 8px;
+}
+
+.footer-marquee {
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-family: sans-serif;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  position: relative;
+  background-color: #ee6e73;
+  padding-top: 15px;
+  color: white;
+}
+
+.unset-transform {
+  text-transform: unset;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

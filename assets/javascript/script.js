@@ -5,7 +5,8 @@
 // Dropdown trigger
 $(".dropdown-trigger").dropdown();
 $(document).ready(function () {
-    // get and publish world-stats
+  marqueeHandler();
+  // get and publish world-stats
   renderWorldStats();
   // start interval timer that will change the random images
   randomImages();
@@ -294,12 +295,12 @@ function populateRegionTable() {
           console.log("\tTotal Deaths:    " + totalDeaths);
         }
         newCases = formatNumber(newCases);
-        activeCases= formatNumber(activeCases);
-        criticalCases= formatNumber(criticalCases);
-        recoveredCases= formatNumber(recoveredCases);
-        totalCases= formatNumber(totalCases);
-        newDeaths= formatNumber(newDeaths);
-        totalDeaths= formatNumber(totalDeaths);
+        activeCases = formatNumber(activeCases);
+        criticalCases = formatNumber(criticalCases);
+        recoveredCases = formatNumber(recoveredCases);
+        totalCases = formatNumber(totalCases);
+        newDeaths = formatNumber(newDeaths);
+        totalDeaths = formatNumber(totalDeaths);
         $tableRow = $(`<tr>
         <th>${country}</th>
         <!--new cases-->
