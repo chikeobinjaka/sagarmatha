@@ -10,8 +10,22 @@ $(document).ready(function () {
   renderWorldStats();
   // start interval timer that will change the random images
   randomImages();
-  // first thing is to get the COVID 19 stats from COVID193 API for the world
-  // and process it
+  $(".home-btn").prop("disabled", true);
+  $(".home-btn").click(function (event) {
+    homeButtonActionListener(event, this);
+  });
+
+  $(".contact-btn").click(function (event) {
+    contactButtonActionListener(event, this);
+  });
+
+  $(".about-us-btn").click(function (event) {
+    aboutUsButtonActionListener(event, this);
+  });
+
+  $aboutUsSection = $("#about-us-section");
+  $mainSection = $("#main-section");
+  $contactSection = $("#contact-section");
 });
 
 /**

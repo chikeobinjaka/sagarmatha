@@ -113,7 +113,7 @@ function countySelectActionListener(event, county) {
   // clear stats sidebar
   $("#county-stats").empty();
   var countyStats = getCountyStat(selectedCountry, selectedProvince, selectedCounty);
-  if (logIt)console.log(countyStats);
+  if (logIt) console.log(countyStats);
   var confirmedStat = formatNumber(countyStats.confirmed);
   var deathsStat = formatNumber(countyStats.deaths);
   var recoveredStat = formatNumber(countyStats.recovered);
@@ -124,4 +124,45 @@ function countySelectActionListener(event, county) {
   <p class="side-nav-p">Recovered:&nbsp;<span id="county-stat-recovered" style="font-weight: bold;">${recoveredStat}</span></p>`;
   var $element = $(html);
   $("#county-stats").append($element);
+}
+
+function aboutUsButtonActionListener(event, target) {
+  if (logIt) {
+    console.log("About button clicked");
+    console.log(target);
+  }
+  // disable button and enable the others
+  $(".about-us-btn").prop("disabled", true);
+  $(".home-btn").prop("disabled", false);
+  $(".contact-btn").prop("disabled", false);
+  $contactSection.hide();
+  $mainSection.hide();
+  $aboutUsSection.show();
+  // hide the relevant sections and show only the one AboutUs section
+}
+
+function homeButtonActionListener(event, target) {
+  if (logIt) {
+    console.log("Home button clicked");
+    console.log(target);
+  }
+  $(".home-btn").prop("disabled", true);
+  $(".contact-btn").prop("disabled", false);
+  $(".about-us-btn").prop("disabled", false);
+  $contactSection.hide();
+  $aboutUsSection.hide();
+  $mainSection.show();
+}
+
+function contactButtonActionListener(event, target) {
+  if (logIt) {
+    console.log("Contact button clicked");
+    console.log(target);
+  }
+  $(".contact-btn").prop("disabled", true);
+  $(".home-btn").prop("disabled", false);
+  $(".about-us-btn").prop("disabled", false);
+  $aboutUsSection.hide();
+  $mainSection.hide();
+  $contactSection.show();
 }
