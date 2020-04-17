@@ -84,7 +84,9 @@ var selectedCounty = null;
 //           },
 // }
 var provinceStats = {};
-
+var $aboutUsSection;
+var $mainSection;
+var $contactSection;
 /**
  * Formats numbers by adding commas where needed
  * @param {*} num
