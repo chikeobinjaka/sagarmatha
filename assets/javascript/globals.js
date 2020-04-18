@@ -13,7 +13,7 @@ const COUNTRIES_WITH_COUNTY_DATA = { USA: "US" };
 // Regions that will not be in the country dropdown. These areas are in the COVID-193 data
 const SKIP_REGIONS = ["All", "Africa", "Europe", "Asia", "Oceania", "North America", "South America"];
 const RANDOM_IMAGE_PARTIAL_PATH = "./assets/images/random/random-";
-const RANDOM_IMAGE_COUNT = 8;
+const RANDOM_IMAGE_COUNT = 24;
 const RANDOM_IMAGE_INTERVAL_MILLI = 5000;
 const logIt = false;
 var CONTINENT_REGIONS = { Africa: {}, "North-America": {}, "South-America": {}, Europe: {}, Asia: {}, Oceania: {} };
