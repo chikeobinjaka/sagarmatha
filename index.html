@@ -5,63 +5,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sagarmatha</title>
     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- <link rel="stylesheet" href="./assets/css/style2.css" /> -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
-  <body style="background-image: url('./assets/images/COVID-19-background-image-2301x1306.jpeg');">
+  <body style="background-color: lightgoldenrodyellow;">
     <nav>
-        <div class="nav-wrapper">
-          <a style="font-weight: bolder;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" href="#!" class="brand-logo center">Sagarmatha COVID-19 Global Numbers</a>
-        <!--
-          <ul class="left hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li class="active"><a href="collapsible.html">JavaScript</a></li>
-          </ul>-->
-        </div>
-      </nav>
 
-      <div class="row">
-        <col>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi vel suscipit cum animi, eveniet quo accusantium exercitationem! Dolor porro nostrum sunt facilis ut nesciunt velit labore, molestias officia reiciendis consequatur!</p>
-        <col>
-          <p>Eaque numquam ratione earum provident amet neque dolor vel. Ad vitae tenetur iusto impedit, deserunt iste similique sequi, iure eius quam labore doloremque tempora reprehenderit harum dolores commodi vero aliquid.</p>
-        <col>
-          <p>Perspiciatis recusandae atque possimus modi numquam sint eum amet similique laudantium, ea officiis maiores hic assumenda sunt est placeat. Dolore, recusandae nam? Perferendis dicta ullam perspiciatis atque deleniti, eum consequuntur.</p>
-        <col>
-          <p>Eveniet a voluptate laboriosam rem facere porro aperiam eius ipsa perferendis quibusdam libero velit, nobis nostrum tenetur, dolore eos exercitationem est quasi distinctio deleniti nesciunt temporibus! Aliquid, modi molestias. Repudiandae?</p>
+      <div class="nav-wrapper">
+        <a
+          style="font-weight: bolder; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"
+          href="#!"
+          class="brand-logo center"
+          >Sagarmatha COVID-19 Global Numbers</a
+        >
+        <ul class="right hide-on-med-and-down">
+          <li><button class="btn-flat home-btn" type="submit">Home</button></li>
+          <li><button class="btn-flat contact-btn" type="submit">Contact</button></li>
+          <li><button class="btn-flat about-us-btn" type="submit">About Us</button></li>
+        </ul>
       </div>
-      <div class="row">
-        <col>
-          <p>Minima quasi aspernatur libero quo quisquam, nesciunt deserunt quas architecto rem dolor doloremque repellat et veniam, optio debitis nihil quibusdam maiores! Explicabo aliquam, iure maiores harum sint rerum consequatur blanditiis.</p>
-        <col>
-          <p>Iste, eligendi nobis neque quos repellat quas aliquam quae recusandae ab laudantium nostrum ut dolor esse quo? Maxime, suscipit hic sint cum officia maiores quo atque nesciunt mollitia iusto quisquam!</p>
-        <col>
-          <p>Qui, reiciendis dicta beatae officiis mollitia maxime rem doloremque a laboriosam esse, dolorem incidunt soluta aperiam dignissimos! Tenetur velit ratione, ut natus maiores quaerat, nisi in obcaecati illo quae omnis.</p>
-        <col>
-          <p>Omnis totam laboriosam quibusdam provident sapiente nostrum eos neque, asperiores enim consectetur eligendi veniam sequi voluptatem est iure ratione repellat aliquid voluptate dolorum, nobis officia, modi animi. Quis, incidunt suscipit!</p>
+    </nav>
+    <section id="main-section">
+      <div class="container" id="main-div">
+        <div class="row left-align" id="dropdown-row">
+          <div class="col" id="country-dropdown-div">
+            <label style="font-weight: bold;">Country Select</label>
+            <select style="background-color: goldenrod;" class="browser-default" id="country-dropdown-select">
+              <option value="" disabled selected>Choose country</option>
+            </select>
+          </div>
+          <div class="col" id="state-dropdown-div"></div>
+          <div class="col" id="county-dropdown-div"></div>
+        </div>
+        <!-- This row will contain the main part of the page. Two major columns
+      1. Column containing random messages about corona virus
+      -->
+        <div class="row">
+          <div class="col s4" style="border: 1px solid black;" id="sidebar">
+            <div class="row" id="world-stats">
+              <h5 style="color: red; font-weight: bold; background-color: aquamarine;">World Stats:</h5>
+              <p class="side-nav-p">
+                Total Cases:&nbsp;<span id="world-stat-total-cases" style="font-weight: bold;"></span>
+              </p>
+              <p class="side-nav-p">
+                Total Deaths:&nbsp;<span id="world-stat-total-deaths" style="font-weight: bold;"></span>
+              </p>
+              <p class="side-nav-p">
+                Recovered:&nbsp;<span id="world-stat-total-recovered" style="font-weight: bold;"></span>
+              </p>
+              <p class="side-nav-p">
+                New Cases:&nbsp;<span id="world-stat-new-cases" style="font-weight: bold;"></span>
+              </p>
+              <p class="side-nav-p">
+                New Deaths:&nbsp;<span id="world-stat-new-deaths" style="font-weight: bold;"></span>
+              </p>
+            </div>
+            <div class="row" id="country-stats"></div>
+            <div class="row" id="province-stats"></div>
+            <div class="row" id="county-stats"></div>
+            <div class="row" style="margin-bottom: 0px;">
+              <img id="random-img" src="./assets/images/random/random-1.PNG" alt="" width="100%" />
+            </div>
+          </div>
+          <div class="col s8 center-align" id="mainbar">
+            <div class="row" id="map" style="margin: 0px; height: 350px;">
+              <img
+                class="center-align"
+                id="img-map"
+                src="./assets/images/maps/countries/world/world.gif"
+                height="100%"
+                alt=""
+              />
+            </div>
+            <div class="row" id="table-data">
+              <table class="striped bordered">
+                <thead>
+                  <tr>
+                    <th colspan="1"></th>
+                    <th style="text-align: center;" colspan="5">Cases</th>
+                    <th style="text-align: center;" colspan="2">Deaths</th>
+                  </tr>
+                  <tr>
+                    <th>Region</th>
+                    <th style="text-align: right;">New</th>
+                    <th style="text-align: right;">Active</th>
+                    <th style="text-align: right;">Critical</th>
+                    <th style="text-align: right;">Recovered</th>
+                    <th style="text-align: right;">Total</th>
+                    <th style="text-align: right;">New</th>
+                    <th style="text-align: right;">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!--
+                    Table content is dynamically generated
+                  -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <col>
-          <p>Temporibus necessitatibus dolore adipisci sit neque exercitationem tenetur nisi, nesciunt officia blanditiis odit perspiciatis, accusantium fugiat quod labore libero corporis corrupti quis suscipit nam, quo tempore quas culpa. Impedit, veritatis!</p>
-        <col>
-          <p>Doloribus aliquid nam itaque ex asperiores totam architecto perspiciatis quos provident. Ut ad minima dolorem, eum sequi fugit, necessitatibus neque a quas tempora, delectus doloribus maxime nam corrupti? Repellendus, cupiditate.</p>
-        <col>
-          <p>Dolore dolorum in et nisi saepe alias ratione itaque magni provident laboriosam possimus quae aut, minima quidem eum sapiente nihil consequuntur pariatur sed blanditiis odit modi tempora nesciunt debitis. Veniam.</p>
-        <col>
-          <p>Sapiente ipsa porro eveniet autem quas ad dolorum aperiam labore illo repellat et mollitia velit, ea cupiditate nemo praesentium quos delectus provident facere! Voluptatum corporis vitae atque quam inventore dicta?</p>
+    </section>
+    <section id="about-us-section" style="display: none;">
+      <div id="about-us-div">
+        <div id="index-banner" class="parallax-container">
+          <div class="section no-pad-bot">
+            <div class="container">
+              <br /><br />
+              <h1 class="header center blue-text text-lighten-2">About Us</h1>
+              <div class="row center">
+                <h5 class="header col s12 light">Welcome to Team Sagarmatha.</h5>
+              </div>
+              <div class="row center">
+                <img src="./assets/images/sagarmatha.jpg" href="index.html" id="download-button" />
+              </div>
+              <br /><br />
+            </div>
+          </div>
+          <div class="parallax"><img src="./assets/images/sagarmatha.jpg" alt="Mountain Sagarmatha" /></div>
+        </div>
+        <div class="container">
+          <div class="section">
+            <!--   Icon Section   -->
+            <div class="row">
+              <div class="col s12 m4">
+                <div class="icon-block">
+                  <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+                  <h5 class="center">Web Development Team</h5>
+                  <p class="light">Eager to learn and excel in an ever changing industry.</p>
+                </div>
+              </div>
+              <div class="col s12 m4">
+                <div class="icon-block">
+                  <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+                  <h5 class="center">Focus</h5>
+                  <p class="light">On understanding all aspects of Full-Stack Web Development.</p>
+                </div>
+              </div>
+              <div class="col s12 m4">
+                <div class="icon-block">
+                  <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
+                  <h5 class="center">Our first Project</h5>
+                  <p class="light">
+                    Sagarmatha Covid-19, a web development app with a user focus on providing worldwide COVID-19
+                    information from freely available data sources and render the data in a clear and concise manner
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contactInfo" id="kyle">
+          <h1>Kyle Boland</h1>
+          <p>
+            Im currently attending UCI Irvine and in the process of learning how to code for the first time. I'll be
+            doing my best too accomplish any new task im given and am open too all learning possibilities.
+          </p>
+          <img src="./assets/images/kyle.png" width="300" height="300" />
+        </div>
+
+        <div class="contactInfo" id="sapana">
+          <h1>Sapana Chaudhary</h1>
+          <p>
+            As I have a goal to establish my career as a web developer in future so rather than telling prospective
+            employers about my skills, it is effective to create a professional portfolio to show them. Professional
+            portfolio is more than a simple resume. It is a showcase that proves that you can do what you talk about in
+            your resume. A well-rounded portfolio is a vital asset that can make all the difference when you’re
+            competing with other hopefuls for a coveted role. Furthermore, you can use a tech portfolio website to craft
+            your personal brand. You can go beyond the work samples to express your personality and highlight critical
+            soft skills too. This gives potential employers a better understanding of how you may fit in with their
+            existing company culture or whether you’d succeed in the role they’re looking to fill.
+          </p>
+          <img src="./assets/images/Sapana.jpg" width="300" height="300" />
+        </div>
+        <div class="contactInfo" id="chikeobi">
+          <h1>Chikeobi Njaka</h1>
+          <p>
+            "Application Developer, Database Administrator, and Project Manager. Data Center Management in the US and
+            overseas. Technical management in semiconductor manufacturing and broadcast technologies. Particularly
+            interested in client/server and relational database design using Informix/Oracle, Sybase, and MS-SQL Server.
+            Specialties: System Integration, Software Development, Database design, Technical Management, Data center
+            operations and management"
+          </p>
+          <img src="./assets/images/chikeobi.jpg" width="300" height="300" />
+        </div>
+        <div class="contactInfo" id="sederick">
+          <h1>Sederick Cowart</h1>
+          <p>
+            I began my softeware development journey in 2020. Working with technology has always been a passion of mine,
+            I first started as a computer technican in 2000 that wanted to always learn more. With the help of UCI, I
+            hope to become an expert one day in software development.
+          </p>
+          <img src="./assets/images/90s.jpg" width="300" height="300" />
+        </div>
       </div>
+    </section>
+    <section id="contact-section" style="display: none;">
+      <div class="container">
+        <div class="row">
+          <div class="col m10 offset-m1 s12">
+            <h2 class="center-align">Sagarmatha Contact Form</h2>
+            <div class="row">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col m6 s12">
+                    <input id="first_name" type="text" class="validate" />
+                    <label for="first_name">First Name</label>
+                  </div>
+                  <div class="input-field col m6 s12">
+                    <input id="last_name" type="text" class="validate" />
+                    <label for="last_name">Last Name</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col m6 s12">
+                    <i class="mdi-content-mail prefix"></i>
+                    <input id="email" type="email" class="validate" required />
+                    <label for="email">Email</label>
+                  </div>
+                  <div class="input-field col m6 s12">
+                    <i class="mdi-maps-store-mall-directory prefix"></i>
+                    <input id="company" type="text" class="validate" />
+                    <label for="company">Company</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="message" class="materialize-textarea"></textarea>
+                    <label for="message">Message</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col m12">
+                    <p class="right-align">
+                      <button class="btn btn-large waves-effect waves-light" type="button" name="action">
+                        Send Message
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!--
     The following is for the Marquee to be placed at the footer
-    <div id="marquee" class="marquee">Sapana is from Nepal, the birthplace of Gautama Buddha</div>
     -->
+    <footer id="marquee-id" class="footer-marquee">
+      <marquee class="art-display"></marquee>
+    </footer>
     <!-- Compiled and minified JavaScript -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/javascript/globals.js"></script>
+    <script src="./assets/javascript/actionListener.js"></script>
+    <script src="./assets/javascript/script2.js"></script>
     <script src="./assets/javascript/script.js"></script>
   </body>
 </html>
